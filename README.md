@@ -8,7 +8,7 @@ This C# project uses <a href="https://www.vintasoft.com/vsimaging-dotnet-index.h
 
 
 ## Screenshot
-<img src="vintasoft-dicom-directory-demo.png" alt="VintaSoft DICOM Directory Demo">
+<img src="vintasoft-dicom-directory-demo.png" title="VintaSoft DICOM Directory Demo">
 
 
 ## Usage
