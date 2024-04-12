@@ -193,7 +193,7 @@ namespace DicomDirectoryDemo
         #region 'File' menu
 
         /// <summary>
-        /// Handles the Click event of OpenDICOMDirectoryToolStripMenuItem object.
+        /// Handles the Click event of openDICOMDirectoryToolStripMenuItem object.
         /// </summary>
         private void openDICOMDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -201,7 +201,7 @@ namespace DicomDirectoryDemo
         }
 
         /// <summary>
-        /// Handles the Click event of CloseDICOMDirectoryToolStripMenuItem object.
+        /// Handles the Click event of closeDICOMDirectoryToolStripMenuItem object.
         /// </summary>
         private void closeDICOMDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -210,7 +210,7 @@ namespace DicomDirectoryDemo
         }
 
         /// <summary>
-        /// Handles the Click event of ExitToolStripMenuItem object.
+        /// Handles the Click event of exitToolStripMenuItem object.
         /// </summary>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -223,7 +223,7 @@ namespace DicomDirectoryDemo
         #region 'View' menu
 
         /// <summary>
-        /// Handles the Click event of ImageViewerSettingsToolStripMenuItem object.
+        /// Handles the Click event of imageViewerSettingsToolStripMenuItem object.
         /// </summary>
         private void imageViewerSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -235,7 +235,7 @@ namespace DicomDirectoryDemo
         }
 
         /// <summary>
-        /// Handles the Click event of ClockwiseToolStripMenuItem object.
+        /// Handles the Click event of clockwiseToolStripMenuItem object.
         /// </summary>
         private void clockwiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -243,7 +243,7 @@ namespace DicomDirectoryDemo
         }
 
         /// <summary>
-        /// Handles the Click event of CounterclockwiseToolStripMenuItem object.
+        /// Handles the Click event of counterclockwiseToolStripMenuItem object.
         /// </summary>
         private void counterclockwiseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -256,7 +256,7 @@ namespace DicomDirectoryDemo
         #region 'Help' menu
 
         /// <summary>
-        /// Handles the Click event of AboutToolStripMenuItem object.
+        /// Handles the Click event of aboutToolStripMenuItem object.
         /// </summary>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -272,7 +272,7 @@ namespace DicomDirectoryDemo
         #region Image Viewer Tool Strip
 
         /// <summary>
-        /// Handles the OpenFile event of ImageViewerToolStrip1 object.
+        /// Handles the OpenFile event of imageViewerToolStrip1 object.
         /// </summary>
         private void imageViewerToolStrip1_OpenFile(object sender, EventArgs e)
         {
