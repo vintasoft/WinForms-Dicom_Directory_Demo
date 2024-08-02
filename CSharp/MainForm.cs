@@ -3,13 +3,12 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Forms;
 
+using DemosCommonCode;
+using DemosCommonCode.Imaging;
+
 using Vintasoft.Imaging;
 using Vintasoft.Imaging.Codecs;
 using Vintasoft.Imaging.Codecs.ImageFiles.Dicom;
-
-using DemosCommonCode;
-using DemosCommonCode.Imaging;
-using DemosCommonCode.Dicom;
 
 namespace DicomDirectoryDemo
 {
@@ -40,11 +39,6 @@ namespace DicomDirectoryDemo
         /// A value indicating whether the application form is closing.
         /// </summary> 
         bool _isFormClosing = false;
-
-        /// <summary>
-        /// Controller of files in current DICOM series.
-        /// </summary>
-        DicomSeriesController _dicomSeriesController = new DicomSeriesController();
 
         #endregion
 
@@ -395,12 +389,9 @@ namespace DicomDirectoryDemo
         /// </summary>
         private void ClosePreviouslyOpenedFiles()
         {
-            // if DICOM series has files
-            if (_dicomSeriesController.FileCount > 0)
-            {
-                // close the previously opened DICOM file
-                CloseDicomSeries();
-            }
+            // close the previously opened DICOM file
+            imageViewer1.Images.ClearAndDisposeItems();
+
             // if DICOM directory is opened
             if (_dicomDirectoryFile != null)
             {
@@ -410,93 +401,38 @@ namespace DicomDirectoryDemo
         }
 
         /// <summary>
-        /// Reopens the series of DICOM file.
+        /// Opens the DICOM file.
         /// </summary>
-        /// <param name="filePath">A path to the first DICOM file in series.</param>
-        private void ReopenDicomFileSeries(string filePath)
+        /// <param name="filePath">A path to the DICOM file.</param>
+        private void OpenDicomFile(string filePath)
         {
             // close DICOM series
-            CloseDicomSeries();
+            CloseDicomFile();
 
             try
             {
                 imageViewer1.Update();
 
-                DicomFile dicomFile = null;
                 try
                 {
-                    // if the series already contains the specified DICOM file
-                    if (_dicomSeriesController.Contains(filePath))
-                    {
-                        DemosTools.ShowInfoMessage(string.Format("The series already contains DICOM file \"{0}\".", Path.GetFileName(filePath)));
-                        return;
-                    }
-
-                    // instance number of new DICOM file
-                    int newDicomFileInstanceNumber = 0;
-                    // add DICOM file to the current series of DICOM images and get the DICOM images of new DICOM file
-                    ImageCollection newDicomImages =
-                        _dicomSeriesController.AddDicomFileToSeries(filePath, out dicomFile, out newDicomFileInstanceNumber);
-
-                    // if DICOM file represents the DICOM directory
-                    if (IsDicomDirectory(dicomFile))
-                    {
-                        // close the DICOM file
-                        _dicomSeriesController.CloseDicomFile(dicomFile);
-                        // show the error message
-                        DemosTools.ShowInfoMessage("The DICOM directory cannot be added to the series of DICOM images.");
-                        return;
-                    }
-
                     IsDicomFileOpening = true;
 
-                    // if DICOM file does not contain images
-                    if (dicomFile.Pages.Count == 0)
-                    {
-                        // if image viewer contains images
-                        if (imageViewer1.Images.Count > 0)
-                        {
-                            DemosTools.ShowInfoMessage("The DICOM file cannot be added to the series of DICOM images because the DICOM file does not contain image.");
-                        }
-                        else
-                        {
-                            // show message for user
-                            DemosTools.ShowInfoMessage("DICOM file does not contain image.");
-                        }
-                    }
-                    else
-                    {
-                        try
-                        {
-                            // insert images to the specified index
-                            imageViewer1.Images.AddRange(newDicomImages.ToArray());
-                        }
-                        catch
-                        {
-                            // remove new DICOM images from image collection of image viewer
-                            foreach (VintasoftImage newDicomImage in newDicomImages)
-                                imageViewer1.Images.Remove(newDicomImage);
-
-                            // close new DICOM file
-                            _dicomSeriesController.CloseDicomFile(dicomFile);
-                            dicomFile = null;
-
-                            throw;
-                        }
-                    }
+                    // add images from file to the image viewer
+                    imageViewer1.Images.Add(filePath);
 
                     // update header of form
                     this.Text = string.Format(_titlePrefix, Path.GetFileName(filePath));
                 }
                 catch (Exception ex)
                 {
-                    // close file
-                    if (dicomFile != null)
-                        _dicomSeriesController.CloseDicomFile(dicomFile);
-
                     DemosTools.ShowErrorMessage(ex);
-                    CloseDicomSeries();
+
+                    CloseDicomFile();
                 }
+
+                if (imageViewer1.Images.Count == 0)
+                    // show message for user
+                    DemosTools.ShowInfoMessage("DICOM file does not contain image.");
 
                 // update UI
                 UpdateUI();
@@ -512,14 +448,12 @@ namespace DicomDirectoryDemo
         }
 
         /// <summary>
-        /// Closes series of DICOM frames.
+        /// Closes the DICOM file.
         /// </summary>
-        private void CloseDicomSeries()
+        private void CloseDicomFile()
         {
             // clear image collection of image viewer and dispose all images
             imageViewer1.Images.ClearAndDisposeItems();
-
-            _dicomSeriesController.CloseSeries();
 
             this.Text = string.Format(_titlePrefix, "(Untitled)");
 
@@ -583,11 +517,11 @@ namespace DicomDirectoryDemo
             // if file exists
             if (File.Exists(filePath))
                 // open file
-                ReopenDicomFileSeries(filePath);
+                OpenDicomFile(filePath);
             // if file exists
             else if (File.Exists(filePath + ".dcm"))
                 // open file
-                ReopenDicomFileSeries(filePath + ".dcm");
+                OpenDicomFile(filePath + ".dcm");
             else
             {
                 // show error message
