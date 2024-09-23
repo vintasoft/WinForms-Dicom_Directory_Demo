@@ -540,14 +540,7 @@ namespace DicomDirectoryDemo
         /// </summary>
         private void RotateViewClockwise()
         {
-            if (imageViewer1.ImageRotationAngle != 270)
-            {
-                imageViewer1.ImageRotationAngle += 90;
-            }
-            else
-            {
-                imageViewer1.ImageRotationAngle = 0;
-            }
+            imageViewer1.RotateViewClockwise();
         }
 
         /// <summary>
@@ -555,14 +548,7 @@ namespace DicomDirectoryDemo
         /// </summary>
         private void RotateViewCounterClockwise()
         {
-            if (imageViewer1.ImageRotationAngle != 0)
-            {
-                imageViewer1.ImageRotationAngle -= 90;
-            }
-            else
-            {
-                imageViewer1.ImageRotationAngle = 270;
-            }
+            imageViewer1.RotateViewCounterClockwise();
         }
 
         #endregion 
