@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 
@@ -45,6 +46,7 @@ namespace DicomDirectoryDemo
         /// <summary>
         /// Gets the current DICOM directory.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public DicomFile DicomDirectory
         {
             get
@@ -69,6 +71,7 @@ namespace DicomDirectoryDemo
         /// <summary>
         /// Get the file path of current DICOM directory.
         /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public string DicomDirectoryFilePath
         {
             get
