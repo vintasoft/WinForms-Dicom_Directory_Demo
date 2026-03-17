@@ -1,4 +1,4 @@
-
+﻿
 namespace DicomDirectoryDemo
 {
     partial class MainForm
@@ -49,7 +49,7 @@ namespace DicomDirectoryDemo
             this.dicomDirectoryTreeControl1 = new DicomDirectoryDemo.DicomDirectoryTreeControl();
             this.imageViewer1 = new Vintasoft.Imaging.UI.ImageViewer();
             this.openDicomDirectoryDialog = new System.Windows.Forms.OpenFileDialog();
-            this.imageViewerToolStrip1 = new DemosCommonCode.Imaging.ImageViewerToolStrip();
+            this.imageViewerToolStrip1 = new CommonCode.Imaging.ImageViewerToolStrip();
             this.menuStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -266,7 +266,7 @@ namespace DicomDirectoryDemo
         private System.Windows.Forms.ToolStripMenuItem openDicomDirectoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openDicomDirectoryDialog;
-        private DemosCommonCode.Imaging.ImageViewerToolStrip imageViewerToolStrip1;
+        private CommonCode.Imaging.ImageViewerToolStrip imageViewerToolStrip1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imageViewerSettingsToolStripMenuItem;
