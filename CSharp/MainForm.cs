@@ -46,6 +46,17 @@ namespace DicomDirectoryDemo
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes the <see cref="MainForm"/> class.
+        /// </summary>
+        static MainForm()
+        {
+            Jpeg2000AssemblyLoader.Load();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
+        /// </summary>
         public MainForm()
         {
             // register the evaluation license for VintaSoft Imaging .NET SDK
@@ -56,8 +67,6 @@ namespace DicomDirectoryDemo
             this.Text = string.Format(_titlePrefix, "(Untitled)");
 
             MoveDicomCodecToFirstPosition();
-
-            Jpeg2000AssemblyLoader.Load();
 
             // set the initial directory in open dicom directory dialog
             DemosTools.SetTestFilesFolder(openDicomDirectoryDialog);
